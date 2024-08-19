@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-08-19T11:40:22-03:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Low Level Pirate</title><author><name>Gabriel Martins</name><email>gabrielmrts@yahoo.com</email></author><entry><title type="html">Classic Crackme 0x100 - Parte 1</title><link href="http://localhost:4000/posts/classic-crackme/" rel="alternate" type="text/html" title="Classic Crackme 0x100 - Parte 1" /><published>2024-08-18T00:00:00-03:00</published><updated>2024-08-18T00:00:00-03:00</updated><id>http://localhost:4000/posts/classic-crackme</id><content type="html" xml:base="http://localhost:4000/posts/classic-crackme/"><![CDATA[<p>Nesse post irei fazer um desafio CTF de engenharia reversa. 
+I"�<p>Nesse post irei fazer um desafio CTF de engenharia reversa. 
 Estou usando o site <code class="language-plaintext highlighter-rouge">picoctf</code>.</p>
 
 <p>Temos acesso a um binário chamado <code class="language-plaintext highlighter-rouge">crackme100</code>, então vamos começar por ele.</p>
@@ -54,4 +54,5 @@ JNZ     LAB_00401389
 
 <p>Mas a dor de cabeça vai ser entender o que esse for tá fazendo. Descobrindo isso, conseguimos a flag. Então vamos começar.</p>
 
-<p>Continua na parte 2.</p>]]></content><author><name>Gabriel Martins</name><email>gabrielmrts@yahoo.com</email></author><category term="ctf" /><category term="picoctf" /><category term="reverse engineering" /><summary type="html"><![CDATA[Nesse post irei fazer um desafio CTF de engenharia reversa. Estou usando o site picoctf.]]></summary></entry></feed>
+<p>Continua na parte 2.</p>
+:ET

@@ -31,7 +31,7 @@ JNZ     LAB_00401389
 
 Onde ```JNZ``` (JUMP IF NOT ZERO) da um ```JUMP``` para o label ```LAB_00401389``` que coloca a mensagem de "FAILED!" no registrador ```EDI```, e depois chama ```puts```.
 
-Se a flag estivesse no binário (o que não está), poderíamos modificar o binário para fazer ele mostrar a flag mesmo se a senha estivesse incorreta. Simplesmente alterando a instrução ```JNZ``` para ```JZ```.
+Se a flag estivesse hardcoded no binário (ex: picoctf{flag123}. o que não está), poderíamos modificar o binário para fazer ele mostrar a flag mesmo se a senha estivesse incorreta. Simplesmente alterando a instrução ```JNZ``` para ```JZ```.
 
 Qual a lógica nisso?
 
