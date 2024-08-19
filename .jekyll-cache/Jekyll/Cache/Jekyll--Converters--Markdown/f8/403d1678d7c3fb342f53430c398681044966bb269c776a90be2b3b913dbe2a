@@ -1,0 +1,57 @@
+I".<p>Nesse post irei fazer um desafio CTF de engenharia reversa. 
+Estou usando o site <code class="language-plaintext highlighter-rouge">picoctf</code>.</p>
+
+<p>Temos acesso a um binário chamado <code class="language-plaintext highlighter-rouge">crackme100</code>, então vamos começar por ele.</p>
+
+<p>Rodando um <code class="language-plaintext highlighter-rouge">file crackme100</code> temos:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crackme100: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a064bd4ed6605f6b04abb44282ecc10fedc67684, for GNU/Linux 3.2.0, with debug_info, not stripped
+</code></pre></div></div>
+
+<p>Já temos algumas informações sobre o que é esse binário, então vou partir para o <code class="language-plaintext highlighter-rouge">Ghidra</code>, uma ferramente open-source poderosa para fazer engenharia reversa.</p>
+
+<p><img src="/assets/imgs/1.png" alt="Print" /></p>
+
+<p>A instrução que faz esse <code class="language-plaintext highlighter-rouge">if (iVar2 == 0)</code> na linha 87:</p>
+
+<p><img src="/assets/imgs/2.png" alt="Print" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TEST    EAX, EAX
+JNZ     LAB_00401389
+</code></pre></div></div>
+
+<p>Onde <code class="language-plaintext highlighter-rouge">JNZ</code> (JUMP IF NOT ZERO) da um <code class="language-plaintext highlighter-rouge">JUMP</code> para o label <code class="language-plaintext highlighter-rouge">LAB_00401389</code> que coloca a mensagem de “FAILED!” no registrador <code class="language-plaintext highlighter-rouge">EDI</code>, e depois chama <code class="language-plaintext highlighter-rouge">puts</code>.</p>
+
+<p>Se a flag estivesse no binário (o que não está), poderíamos modificar o binário para fazer ele mostrar a flag mesmo se a senha estivesse incorreta. Simplesmente alterando a instrução <code class="language-plaintext highlighter-rouge">JNZ</code> para <code class="language-plaintext highlighter-rouge">JZ</code>.</p>
+
+<p>Qual a lógica nisso?</p>
+
+<p>A linha <code class="language-plaintext highlighter-rouge">iVar2 = memcmp(input,output,(long)(int)sVar3);</code> chama o <code class="language-plaintext highlighter-rouge">memcmp</code> para comparar se o input é igual o output (a senha propriamente dita), ele retorna 0 caso seja igual, e valores diferentes de 0 caso seja diferente.</p>
+
+<p>O retorno do memcmp é armazenado no registrador EAX.</p>
+
+<p>Na linha <code class="language-plaintext highlighter-rouge">TEST EAX, EAX</code> que é equivalente a <code class="language-plaintext highlighter-rouge">EAX AND EAX</code>, em outras palavras, se o retorno do memcmp que é armazenado em EAX, for 0 (zero), significa que o input e output são iguais, se não for 0, significa que são diferentes.</p>
+
+<p>O resultado da instrução TEST é armazenada no zero flag ZF.</p>
+
+<p>Nesse caso se inserirmos uma senha errada, TEST irá atualizar o ZF para 0 (por que o resultado do memcmp não resultou em 0). E isso irá fazer com que <code class="language-plaintext highlighter-rouge">JNZ LAB_00401389</code> seja executado.</p>
+
+<p>Por outro lado, se o retorno de memcmp for 0, ZF será 1, e <code class="language-plaintext highlighter-rouge">JNZ LAB_00401389</code> não será executado.</p>
+
+<p>Dito isso, nós podemos usar a funcionalidade <code class="language-plaintext highlighter-rouge">Patch Instruction</code> do Ghidra, e alterar o JNZ para JZ (Jump if Zero). Com isso, vamos ter o efeito oposto, se ZF for 0 (se errarmos a senha).</p>
+
+<p><img src="/assets/imgs/3.png" alt="Print" /></p>
+
+<p>Se gerarmos um novo binário com essa instrução alterada, podemos colocar a senha incorreta que ele nos traria a flag.</p>
+
+<p><img src="/assets/imgs/4.png" alt="Print" /></p>
+
+<p>Infelizmente nesse caso, a flag real está em um servidor remoto ao qual o picoctf disponibiliza para o desafio.</p>
+
+<p>Então vamos precisar entender como a flag é feita.</p>
+
+<p>No código decompilado, nós temos um array de caracteres chamado output, que possui o tamanho 51. <code class="language-plaintext highlighter-rouge">char output [51];</code></p>
+
+<p>Mas a dor de cabeça vai ser entender o que esse for tá fazendo. Descobrindo isso, conseguimos a flag.</p>
+
+:ET

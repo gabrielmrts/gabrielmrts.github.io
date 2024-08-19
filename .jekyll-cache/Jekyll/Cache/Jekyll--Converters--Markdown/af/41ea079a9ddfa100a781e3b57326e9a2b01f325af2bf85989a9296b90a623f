@@ -1,0 +1,18 @@
+I"�<blockquote>
+  <p>Aviso: O conteúdo mostrado abaixo é meramente educativo.</p>
+</blockquote>
+
+<p>Bom, eu tava sem nada pra fazer e decidi olhar o firmware da TV Samsung que tenho aqui em casa.</p>
+
+<p>Baixei o firmware no site da fabricante e decidi xeretar um pouco e ver como as coisas funcionam.</p>
+
+<p>Logo de cara vi que o arquivo era um .msd, então eu estranhei por que não conhecia esse formato, mas fui em frente e rodei um binwalk pra poder ver o que tinha nesse binário.</p>
+
+<p>Para a surpresa de zero pessoas, é um binário contendo várias coisas, mas o que me chamou atenção foi uma section que iniciava com “gzip compressed data”.</p>
+
+<p><img src="/assets/imgs/1.png" alt="Print" /></p>
+
+<p>Então rodei um <code class="language-plaintext highlighter-rouge">binwalk -e file.msd</code> pra poder extrair os arquivos desse binário.</p>
+
+<p><img src="/assets/imgs/2.png" alt="Print" /></p>
+:ET

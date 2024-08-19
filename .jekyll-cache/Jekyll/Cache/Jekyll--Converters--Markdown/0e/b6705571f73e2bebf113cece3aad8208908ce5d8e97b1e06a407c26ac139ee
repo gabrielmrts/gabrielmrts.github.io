@@ -1,0 +1,13 @@
+I"�<p>Nesse post irei fazer um desafio CTF de engenharia reversa. 
+Estou usando o site <code class="language-plaintext highlighter-rouge">picoctf</code>.</p>
+
+<p>Temos acesso a um binário chamado <code class="language-plaintext highlighter-rouge">crackme100</code>, então vamos começar por ele.</p>
+
+<p>Rodando um <code class="language-plaintext highlighter-rouge">file crackme100</code> temos:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crackme100: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a064bd4ed6605f6b04abb44282ecc10fedc67684, for GNU/Linux 3.2.0, with debug_info, not stripped
+</code></pre></div></div>
+
+<p>Já temos algumas informações sobre o que é esse binário, então vou partir para o <code class="language-plaintext highlighter-rouge">Ghidra</code>, uma ferramente open-source poderosa para fazer engenharia reversa.</p>
+
+:ET
