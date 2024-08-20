@@ -8,7 +8,8 @@ categories: ["ctf", "picoctf", "reverse engineering"]
 Nesse post irei fazer um desafio CTF de engenharia reversa. 
 Estou usando o site ```picoctf```.
 
-Temos acesso a um binário chamado ```crackme100```, então vamos começar por ele.
+Esse é um desafio onde precisamos encontrar uma flag que ta presente em um binário que a picoctf nos disponibiliza.
+Temos acesso a um binário chamado ```crackme100```, e mais nenhuma informação, então vamos começar por ele.
 
 Rodando um ```file crackme100``` temos:
 
